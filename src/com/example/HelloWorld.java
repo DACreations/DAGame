@@ -120,7 +120,6 @@ public class HelloWorld {
 
     public static void main(String[] args) {
         new HelloWorld().run();
-        System.out.println("hola");
     }
 
 }
