@@ -10,11 +10,11 @@ public class StateStack {
     }
 
     void update(String dt){
-        stack.peek().update(dt);
+        stack.peek().update();
     }
 
     void processAI(String [] params, String dt) {
-        stack.peek().processAI(params, dt);
+        stack.peek().processAI();
     }
 
     void clear() {
