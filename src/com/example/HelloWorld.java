@@ -107,7 +107,7 @@ public class HelloWorld {
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
-        while ( !glfwWindowShouldClose(window) ) {
+        while ( !glfwWindowShouldClose(window) && glfwGetKey(window,GLFW_KEY_ESCAPE) != GLFW_TRUE) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
             glfwSwapBuffers(window); // swap the color buffers
@@ -116,6 +116,7 @@ public class HelloWorld {
             // invoked during this call.
             glfwPollEvents();
         }
+
     }
 
     public static void main(String[] args) {
