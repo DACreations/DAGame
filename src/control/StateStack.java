@@ -9,23 +9,24 @@ public class StateStack {
         stack = new Stack<>();
     }
 
-    void update(){
-
+    void update(String dt){
+        stack.peek().update(dt);
     }
 
-    void processAI() {
-
+    void processAI(String [] params, String dt) {
+        stack.peek().processAI(params, dt);
     }
 
     void clear() {
-
+        stack.clear();
     }
 
     void push(State state) {
-
+        stack.push(state);
+        stack.peek().enter();
     }
 
     void pop() {
-
+        stack.pop().exit();
     }
 }

@@ -8,7 +8,9 @@ public interface State {
 
     void exit();
 
-    void update(Param param);
+    void update(String param);
+
+    void processAI(String [] param, String dt);
 
     void render();
 }
