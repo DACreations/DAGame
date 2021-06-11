@@ -1,16 +1,31 @@
 package control;
+import java.util.Stack;
 
-public interface StateStack {
+public class StateStack {
 
-    void init();
+    private Stack<State> stack;
 
-    void update();
+    public StateStack(){
+        stack = new Stack<>();
+    }
 
-    void processAI();
+    void update(){
 
-    void clear();
+    }
 
-    void push();
+    void processAI() {
 
-    void pop();
+    }
+
+    void clear() {
+
+    }
+
+    void push(State state) {
+
+    }
+
+    void pop() {
+
+    }
 }
