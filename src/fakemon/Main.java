@@ -50,9 +50,17 @@ public class Main {
         glfwDefaultWindowHints(); // optional, the current window hints are already the default
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
+        glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE); // the window will be fullscreen
+//        glfwWindowHint(GLFW_DECORATED, GLFW_TRUE);
 
         // Create the window
-        window = glfwCreateWindow(300, 300, "Hello World!", NULL, NULL);
+
+        int [] screenData = TestResolution.display();
+
+        window = glfwCreateWindow(screenData[0], screenData[1], "Hello World!", NULL, NULL);
+//        glfwMakeContextCurrent(window);
+//        glfwShowWindow(window);
+
         if ( window == NULL )
             throw new RuntimeException("Failed to create the GLFW window");
 
@@ -121,7 +129,6 @@ public class Main {
 
     public static void main(String[] args) {
         new Main().run();
-        System.out.println("hola");
     }
 
 }
