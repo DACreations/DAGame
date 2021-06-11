@@ -11,12 +11,12 @@ public class StartState implements State {
 
     @Override
     public void enter() {
-
+        return;
     }
 
     @Override
     public void exit() {
-
+        return;
     }
 
     @Override
