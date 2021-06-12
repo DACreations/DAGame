@@ -1,4 +1,4 @@
-package fakemon;
+package engine;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;
