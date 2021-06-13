@@ -2,13 +2,13 @@ package control;
 
 public interface State {
 
-    void init();
+//    void init();
 
     void enter();
 
     void exit();
 
-    void update();
+    void update(float dt);
 
     void processAI();
 

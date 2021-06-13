@@ -1,8 +1,12 @@
 package engine;
 
+import control.StateStack;
+import control.game.FadeInState;
+import control.game.StartState;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
+import util.Time;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
@@ -15,22 +19,19 @@ public class Window {
     int width, height;
     String title;
     private long glfwWindow;
+    public StateStack gStateStack;
 
-    private float a, r, g, b;
 
 //    Singleton
     private static Window window = null;
-    private boolean fadeToBlack;
+
 
     private Window() {
         getScreenInfo = TestResolution.display();
         this.width = getScreenInfo[0];
         this.height = getScreenInfo[1];
         this.title = "Fakemon";
-        a = 1;
-        r = 1;
-        g = 1;
-        b = 1;
+
     }
 
     public static Window get(){
@@ -50,6 +51,7 @@ public class Window {
         glfwDestroyWindow(glfwWindow);
 
         glfwTerminate();
+
         glfwSetErrorCallback(null).free();
     }
 
@@ -95,9 +97,16 @@ public class Window {
         // creates the GLCapabilities instance and makes the OpenGL
         // bindings available for use.
         GL.createCapabilities();
+
+        gStateStack = new StateStack();
+        gStateStack.push(new StartState());
+
     }
 
     private void loop() {
+        float beginTime = Time.getTime();
+        float endTime;
+        float dt = -1.0f;
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
@@ -106,26 +115,19 @@ public class Window {
             // invoked during this call.
             glfwPollEvents();
 
-            glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
-            if (fadeToBlack){
-                r = Math.max(r-0.01f, 0);
-                g = Math.max(g-0.01f, 0);
-                b = Math.max(b-0.01f, 0);
+            if (dt >= 0) {
+                gStateStack.update(dt);
             }
 
-            if (r == 0 && g == 0 && b == 0){
-                fadeToBlack = false;
-                r = 1;
-                g = 1;
-                b = 1;
-            }
-            if(KeyListener.isKeyPressed(GLFW_KEY_SPACE)){
-                fadeToBlack = true;
-            }
+            gStateStack.render();
 
             glfwSwapBuffers(glfwWindow); // swap the color buffers
+
+            endTime = Time.getTime();
+            dt = endTime - beginTime;
+            beginTime = endTime;
         }
     }
 }
