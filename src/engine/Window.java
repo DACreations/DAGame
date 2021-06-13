@@ -127,7 +127,5 @@ public class Window {
 
             glfwSwapBuffers(glfwWindow); // swap the color buffers
         }
-
-        glfwTerminate();
     }
 }
