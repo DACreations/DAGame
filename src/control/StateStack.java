@@ -1,5 +1,7 @@
 package control;
+import java.util.Iterator;
 import java.util.Stack;
+import control.State;
 
 public class StateStack {
 
@@ -9,24 +11,30 @@ public class StateStack {
         stack = new Stack<>();
     }
 
-    void update(String dt){
-        stack.peek().update();
+    public void update(float dt){
+        stack.peek().update(dt);
     }
 
-    void processAI(String [] params, String dt) {
+    public void processAI(String [] params, String dt) {
         stack.peek().processAI();
     }
 
-    void clear() {
+    public void render(){
+        for (State state : stack) {
+            state.render();
+        }
+    }
+
+    public void clear() {
         stack.clear();
     }
 
-    void push(State state) {
+    public void push(State state) {
         stack.push(state);
         stack.peek().enter();
     }
 
-    void pop() {
+    public void pop() {
         stack.pop().exit();
     }
 }
