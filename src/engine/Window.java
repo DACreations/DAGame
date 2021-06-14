@@ -3,6 +3,7 @@ package engine;
 import control.StateStack;
 import control.game.FadeInState;
 import control.game.StartState;
+
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
@@ -22,8 +23,11 @@ public class Window {
     public StateStack gStateStack;
 
 
+    private float a, r, g, b;
+
 //    Singleton
     private static Window window = null;
+    private boolean fadeToBlack;
 
 
     private Window() {
@@ -51,8 +55,6 @@ public class Window {
         glfwDestroyWindow(glfwWindow);
 
         glfwTerminate();
-
-        glfwSetErrorCallback(null).free();
     }
 
     private void init() {
@@ -122,6 +124,7 @@ public class Window {
             }
 
             gStateStack.render();
+
 
             glfwSwapBuffers(glfwWindow); // swap the color buffers
 
